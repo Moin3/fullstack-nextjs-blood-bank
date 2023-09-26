@@ -36,3 +36,7 @@ next-env.d.
 
 #enviromnet variable
 .env
+*.env
+*.env.example
+*.env.local
+*.env.staging
