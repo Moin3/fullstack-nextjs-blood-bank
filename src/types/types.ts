@@ -29,3 +29,61 @@ export interface IInventory extends Document {
     hospital?: mongoose.Types.ObjectId;
     donar?: mongoose.Types.ObjectId; 
   }
+
+export interface IInputType{
+    labelTxt:string,
+    inputType:string,
+    id:string,
+    name:string,
+    value:any,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    checked?:boolean,
+}
+
+export interface ILoginReq{
+    role:string,
+    email:string,
+    password:string
+}
+
+interface Iuser{
+    _id: string,
+    role: string,
+    name?: string;
+    hospitalName?: string;
+    organisationName: string,
+    email: string,
+    password: string,
+    address: string,
+    phone: string,
+}
+
+export interface AuthState {
+loading:boolean,
+user:Iuser | null,
+token:string | null,
+error:any | null,
+message:string | null
+isSuccess:boolean | null
+
+
+}
+
+export interface IForm{
+    formTitle:string,
+    btnTxt:string,
+    formType:string,
+    btnType:string
+}
+
+export interface IFormValues {
+    role: string;
+    email: string;
+    password: string;
+    name?: string;
+    hospitalName?: string;
+    organisationName?: string;
+    website?: string;
+    address?: string;
+    phone?: string;
+  }

@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
 
     /* ----------------------------- user validation ---------------------------- */
     if(exisitingUser){
-        return NextResponse.json({error: "User already exists"}, {status: 400})
+        return NextResponse.json({message: "User already exists"}, {status: 200})
     }
 
     /* ------------------------------ hash password ----------------------------- */
@@ -35,7 +35,6 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       {
         success: false,

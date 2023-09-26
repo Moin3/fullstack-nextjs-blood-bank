@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
                 success: false,
                 message: "Invalid Credentials",
               },
-             {status: 500})
+             {status: 201})
     }
 
     /* ------------------------------- check role ------------------------------- */
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
           success: false,
           message: "role dosent match",
-        });
+        },{status: 201});
       }
 
 
@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
             success: false,
             message: "Invalid Credentials",
             },
-            {status: 400});
+            {status: 201});
       }
 
 
