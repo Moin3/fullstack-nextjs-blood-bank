@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '@/redux/store';
-import { getCurrentUserAsync, loginUserAsync, registerUserAsync } from './authAction';
+import { getCurrentUserAsync, loginUserAsync, registerUserAsync, signOutAsync } from './authAction';
 import { AuthState } from '@/types/types';
 
 
@@ -69,6 +69,16 @@ export const authSlice = createSlice({
         state.loading = false;
         state.error = payload;
       });
+
+          // get current user
+    builder.addCase(signOutAsync.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(signOutAsync.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.user = null;
+    });
   }
 })
 

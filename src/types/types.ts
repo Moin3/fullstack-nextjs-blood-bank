@@ -27,7 +27,8 @@ export interface IInventory extends Document {
     email: string;
     organisation?: mongoose.Types.ObjectId; 
     hospital?: mongoose.Types.ObjectId;
-    donar?: mongoose.Types.ObjectId; 
+    donar?: mongoose.Types.ObjectId;
+    role?:IRole 
   }
 
 export interface IInputType{

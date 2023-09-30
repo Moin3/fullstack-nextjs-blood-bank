@@ -11,74 +11,73 @@ export async function POST(request:NextRequest){
 
     try {
         const reqBody = await request.json();
-        const userId = await getDataFromToken(request);
-        const user = await User.findOne({_id:userId}).select("-password");
+        // const userId = await getDataFromToken(request);
+        const user = await User.findOne({email:reqBody.email}).select("-password");
 
         if (!user) {
-            throw new Error("User Not Found");
+            throw new Error("This user is not registered");
           }
 
-        if (reqBody.inventoryType === "in" && user.role !== "donar") {
-            throw new Error("You can't access doner account");
-        }
-        if (reqBody.inventoryType === "out" && user.role !== "hospital") {
-            throw new Error("You can't access hospital account");
-        }
+          if (reqBody.inventoryType == "out" && user?.role==="hospital") {
+            const requestedBloodGroup = reqBody.bloodGroup;
+            const requestedQuantityOfBlood = reqBody.quantity;
+            const organisation = new mongoose.Types.ObjectId(reqBody.organisation);
 
-        //   if (reqBody.inventoryType == "out") {
-        //     const requestedBloodGroup = reqBody.bloodGroup;
-        //     const requestedQuantityOfBlood = reqBody.quantity;
-        //     const organisation = new mongoose.Types.ObjectId(userId);
-        //     //calculate Blood Quanitity
-        //     const totalInOfRequestedBlood = await Inventory.aggregate([
-        //       {
-        //         $match: {
-        //           organisation,
-        //           inventoryType: "in",
-        //           bloodGroup: requestedBloodGroup,
-        //         },
-        //       },
-        //       {
-        //         $group: {
-        //           _id: "$bloodGroup",
-        //           total: { $sum: "$quantity" },
-        //         },
-        //       },
-        //     ]);
-        //     // console.log("Total In", totalInOfRequestedBlood);
-        //     const totalIn = totalInOfRequestedBlood[0]?.total || 0;
-        //     //calculate OUT Blood Quanitity
+            //calculate Blood Quanitity
+            const totalInOfRequestedBlood = await Inventory.aggregate([
+              {
+                $match: {
+                  organisation,
+                  inventoryType: "in",
+                  bloodGroup: requestedBloodGroup,
+                },
+              },
+              {
+                $group: {
+                  _id: "$bloodGroup",
+                  total: { $sum: "$quantity" },
+                },
+              },
+            ]);
+            const totalIn = totalInOfRequestedBlood[0]?.total || 0;
+
+            //calculate OUT Blood Quanitity
+            const totalOutOfRequestedBloodGroup = await Inventory.aggregate([
+              {
+                $match: {
+                  organisation,
+                  inventoryType: "out",
+                  bloodGroup: requestedBloodGroup,
+                },
+              },
+              {
+                $group: {
+                  _id: "$bloodGroup",
+                  total: { $sum: "$quantity" },
+                },
+              },
+            ]);
+            const totalOut = totalOutOfRequestedBloodGroup[0]?.total || 0;
       
-        //     const totalOutOfRequestedBloodGroup = await Inventory.aggregate([
-        //       {
-        //         $match: {
-        //           organisation,
-        //           inventoryType: "out",
-        //           bloodGroup: requestedBloodGroup,
-        //         },
-        //       },
-        //       {
-        //         $group: {
-        //           _id: "$bloodGroup",
-        //           total: { $sum: "$quantity" },
-        //         },
-        //       },
-        //     ]);
-        //     const totalOut = totalOutOfRequestedBloodGroup[0]?.total || 0;
-      
-        //     //in & Out Calc
-        //     const availableQuanityOfBloodGroup = totalIn - totalOut;
-        //     //quantity validation
-        //     if (availableQuanityOfBloodGroup < requestedQuantityOfBlood) {
-        //       return NextResponse.json({
-        //         success: false,
-        //         message: `Only ${availableQuanityOfBloodGroup} ml of ${requestedBloodGroup.toUpperCase()} is available`,
-        //       },{status: 500});
-        //     }
-        //     reqBody.hospital = user?._id;
-        //   } else {
-        //     reqBody.donar = user?._id;
-        //   }
+            //in & Out Calc
+            const availableQuanityOfBloodGroup = totalIn - totalOut;
+
+            //quantity validation
+            if (availableQuanityOfBloodGroup < requestedQuantityOfBlood) {
+                throw new Error(`Only ${availableQuanityOfBloodGroup} ml of ${requestedBloodGroup.toUpperCase()} is available`);
+            }
+            reqBody.hospital = user?._id;
+            reqBody.role = user?.role;
+          } else if(reqBody.inventoryType == "in" && user?.role==="donar"){
+            reqBody.donar = user?._id;
+            reqBody.role = user?.role
+          }else if(reqBody.inventoryType == "out" && user?.role!=="hospital"){
+            throw new Error("Please Select a Hospital Email");
+
+          }else{
+            throw new Error("Please Select a Donar Email");
+        
+          }
         
             /* ------------------------------- save blood record ------------------------------ */
         const inventory = new Inventory(reqBody);

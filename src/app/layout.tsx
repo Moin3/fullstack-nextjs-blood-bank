@@ -4,6 +4,9 @@ import { Inter } from 'next/font/google'
 import ReduxStoreProvider from '@/redux/provider'
 import { Toaster } from 'react-hot-toast'
 import ProtectedRoutesData from '@/components/routes/ProtectedRoutesData'
+import Header from '@/components/reusable/Header'
+import OrganisationInventoryData from '@/components/SidebarContent'
+import SidebarMenu from '@/components/SidebarMenu'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,7 +27,7 @@ export default function RootLayout({
         <body className={inter.className} suppressHydrationWarning={true}>
           <ReduxStoreProvider>
             <ProtectedRoutesData>
-              {children}
+                  {children}
             </ProtectedRoutesData>
           </ReduxStoreProvider>          
           <Toaster

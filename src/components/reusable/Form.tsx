@@ -94,10 +94,10 @@ const Form = ({formTitle,btnTxt,formType,btnType}:IForm) => {
               toast.error("User already exists")
             }else if(RegisterUserInfo.message === 'User Registerd Successfully'){
               toast.success('User Registerd Successfully')
-              router.push('/login')
-              // setTimeout(() => {
-              //   window.location.replace('/login');
-              // }, 1000);
+              // router.push('/login')
+              setTimeout(() => {
+                window.location.replace('/login');
+              }, 1000);
             }
         }
 

@@ -5,7 +5,7 @@ import SidebarMenu from "@/components/SidebarMenu";
 import Header from "@/components/reusable/Header";
 import React from "react";
 
-const Home = () => {
+const Donar = () => {
 
 
 
@@ -23,4 +23,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Donar;

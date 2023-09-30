@@ -50,9 +50,25 @@ export function loginUser(loginInfo:ILoginReq) {
   export function getCurrentUser() {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch(`${baseUrl}/user/self`,{
-            cache:'no-store'
-        });
+        const response = await fetch(`${baseUrl}/user/self`);
+        if (response.ok) {
+          const data = await response.json();
+          resolve({ data });
+        } else {
+          const error = await response.text();
+          reject(error);
+        }
+      } catch (error) {
+        reject( error );
+      }
+  
+    });
+  }
+
+  export function signOut() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await fetch(`${baseUrl}/user/logout`);
         if (response.ok) {
           const data = await response.json();
           resolve({ data });

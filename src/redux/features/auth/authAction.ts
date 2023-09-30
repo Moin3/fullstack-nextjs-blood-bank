@@ -1,7 +1,7 @@
-import { RegisterUser, getCurrentUser, loginUser } from "@/helper/apiRequest";
+import { RegisterUser, getCurrentUser, loginUser, signOut } from "@/helper/apiRequest";
 import { IFormValues, ILoginReq } from "@/types/types"
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { NextResponse } from "next/server";
+
 
 
   export const loginUserAsync = createAsyncThunk(
@@ -44,6 +44,23 @@ import { NextResponse } from "next/server";
     async ({ rejectWithValue }:any) => {
       try {
         const response = await getCurrentUser();
+        return (response as any)?.data;
+        
+      } catch (error:any){
+        if (error.response && error.response.data.message) {
+            return rejectWithValue(error.response.data.message);
+          } else {
+            return rejectWithValue(error.message);
+          }
+      }
+    }
+  );
+
+  export const signOutAsync = createAsyncThunk(
+    "auth/logout",
+    async ({ rejectWithValue }:any) => {
+      try {
+        const response = await signOut();
         return (response as any)?.data;
         
       } catch (error:any){
