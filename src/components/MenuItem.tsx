@@ -10,12 +10,14 @@ interface IMenu{
 const MenuItem = ({ text, active, onClick,path }:IMenu) => {
     return (
       <li
-        className={`cursor-pointer ${
-          active ? 'text-blue-500 font-semibold' : 'text-gray-500'
-        }`}
         onClick={onClick}
       >
-        <Link href={`${path}`}> {text} </Link>
+        <Link 
+            className={`cursor-pointer ${
+              active ? 'text-blue-500 font-semibold' : 'text-gray-500'
+            }`} 
+            href={`${path}`}> {text} 
+        </Link>
       </li>
     );
   };

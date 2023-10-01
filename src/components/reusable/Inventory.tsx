@@ -40,47 +40,54 @@ const {values,handleChange,handleSubmit,errors,touched} = useFormik({
     initialValues:{
         inventoryType:'in',
         bloodGroup:'',
-        quantity:'',
+        quantity:0,
         email:''
     },
-    onSubmit:async (values,action) => {
+    onSubmit:async (values:IInventoryForm,action) => {
         try{
             if(!values.inventoryType || !values.bloodGroup || !values.email || !values.quantity){
               toast.error('All field is required')
+              
+           }else if(values.quantity < 1 ){
+            toast.error('Your Quantity should be positive')
+           }else{
+            setIsLoading(true)
+            /* ------------------------------ Post Api call ----------------------------- */
+            const response=await fetch(`${baseUrl}/inventory/create`, {
+             method: 'POST',
+             body: JSON.stringify({
+                 inventoryType:values.inventoryType,
+                 bloodGroup:values.bloodGroup,
+                 quantity:values.quantity,
+                 email:values?.email,
+                 organisation:user?._id
+             }),
+             headers: { 'content-type': 'application/json' }
+           }).then(response => {
+             if (!response.ok) {
+             console.log('Network response was not ok');
+             }
+             return response.json(); 
+             })
+             .then(data => {
+             if(data.success===false){
+                 toast.error(data.error)
+                 setIsLoading(false)
+                 setTimeout(() => {
+                     window.location.reload()
+                   }, 1000);
+             }else if(data.success===true){
+                 toast.success(data.message)
+                 setIsLoading(false)
+                 setTimeout(() => {
+                     window.location.reload()
+                   }, 1000);
+             }
+         })
            }
-           setIsLoading(true)
-           /* ------------------------------ Post Api call ----------------------------- */
-           const response=await fetch(`${baseUrl}/inventory/create`, {
-            method: 'POST',
-            body: JSON.stringify({
-                inventoryType:values.inventoryType,
-                bloodGroup:values.bloodGroup,
-                quantity:values.quantity,
-                email:values.email,
-                organisation:user?._id
-            }),
-            headers: { 'content-type': 'application/json' }
-          }).then(response => {
-            if (!response.ok) {
-            console.log('Network response was not ok');
-            }
-            return response.json(); 
-            })
-            .then(data => {
-            if(data.success===false){
-                toast.error(data.error)
-                setIsLoading(false)
-                setTimeout(() => {
-                    window.location.reload()
-                  }, 1000);
-            }else if(data.success===true){
-                toast.success(data.message)
-                setIsLoading(false)
-                setTimeout(() => {
-                    window.location.reload()
-                  }, 1000);
-            }
-        })
+
+           
+
           
           action.resetForm()
         }catch(error:any){

@@ -14,22 +14,22 @@ const SidebarMenu = () => {
     <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
       {/* Sidebar content here */}
       <MenuItem
-          text="Inventory"
+          text="INVENTORY"
           active={activeItem === 'Inventory'}
           onClick={() => handleItemClick('Inventory')}
           path='/'
         />
         <MenuItem
-          text="Donar"
+          text="DONAR"
           active={activeItem === 'Donar'}
           onClick={() => handleItemClick('Donar')}
           path='/donar'
         />
         <MenuItem
-          text="List"
+          text="HOSPITAL"
           active={activeItem === 'Hospital'}
           onClick={() => handleItemClick('Hospital')}
-          path='/donar'
+          path='/hospital'
         />
     </ul>
   </div>

@@ -1,20 +1,18 @@
-"use client"
-import React,{useState,useEffect} from 'react'
-import Inventory from './Inventory'
-import toast from 'react-hot-toast'
-import PageLoader from './PageLoader'
-import { useAppSelector } from '@/redux/hooks'
-import { selectAuth } from '@/redux/features/auth/authSlice'
-import moment from 'moment'
+import { selectAuth } from '@/redux/features/auth/authSlice';
+import { useAppSelector } from '@/redux/hooks';
+import React, { useState,useEffect } from 'react'
+import { GrMenu } from 'react-icons/gr';
+import PageLoader from './reusable/PageLoader';
+import moment from 'moment';
+
 const baseUrl='http://localhost:3000/api/'
 
-
-const Table = () => {
+const DonarToOrgContent = () => {
     const {loading}=useAppSelector(selectAuth)
     const [recordedData,setRecordedData]=useState([] as any)
-    const getBloodRecord=async ()=>{
+    const getDonarRecord=async ()=>{
 
-         const response= await fetch(`${baseUrl}/inventory/get-all`) 
+         const response= await fetch(`${baseUrl}/inventory/get-donar`) 
             .then(response => {
                 if (!response.ok) {
                 console.log('Network response was not ok');
@@ -22,7 +20,7 @@ const Table = () => {
                 return response.json(); 
                 })
             .then(data => {
-                setRecordedData((data as any).inventory)      
+                setRecordedData((data as any).donars)      
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
@@ -32,26 +30,21 @@ const Table = () => {
 
 
     useEffect(()=>{
-        getBloodRecord()
+        getDonarRecord()
     },[])
 
-
   return (
-    <>
-    <div className="p-8">
-        <Inventory/>
-    </div>
+    <div className="drawer-content ">
+    <label htmlFor="my-drawer-2" className="btn btn-ghost drawer-button top-1 lg:hidden"><GrMenu/></label>
     <div className="w-[100vw] lg:w-[65vw] overflow-x-scroll  md:overflow-x-auto p-8">
   <table className="table min-w-full">
     {/* head */}
     <thead>
       <tr className="text-dark-900">
-        <th>Role</th>
-        <th>Email</th>
-        <th>Inventory Type</th>
-        <th>Blood Gropu</th>
-        <th>Quantity</th>
-        <th>Time & date</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Date</th>
       </tr>
     </thead>
         {
@@ -60,12 +53,10 @@ const Table = () => {
                     <tbody>
                     {recordedData?.map((item:any) => (
                             <tr key={item._id} className='hover'>
-                            <td>{item.role}</td>
+                            <td>{item.name}</td>
                             <td>{item.email}</td>
-                            <td>{item.inventoryType}</td>
-                            <td>{item.bloodGroup}</td>
-                            <td>{item.quantity}</td>
-                            <td>{moment(item.createdAt).format('DD/MM/YYYY hh:mm A')}</td>
+                            <td>{item.phone}</td>
+                            <td>{moment(item.createdAt).format("DD/MM/YYYY hh:mm A")}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -74,8 +65,10 @@ const Table = () => {
         }
   </table>
 </div>
-    </>
+    </div>
   )
 }
 
-export default Table
+export default DonarToOrgContent
+
+

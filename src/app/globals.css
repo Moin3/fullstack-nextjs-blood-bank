@@ -21,12 +21,12 @@
 /* Track */
 ::-webkit-scrollbar {
   width: 3px;
-  height: 10px;
+  height: 1px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #4a90e2; /* Change this to your desired color */
+  background:red; /* Change this to your desired color */
   border-radius: 6px;
 }
 

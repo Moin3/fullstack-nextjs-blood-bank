@@ -1,5 +1,6 @@
 "use client"
 
+import DonarToOrgContent from "@/components/DonarToOrgContent";
 import OrganisationInventoryData from "@/components/SidebarContent";
 import SidebarMenu from "@/components/SidebarMenu";
 import Header from "@/components/reusable/Header";
@@ -15,7 +16,7 @@ const Donar = () => {
         <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className={`drawer-toggle`} />
                 <SidebarMenu/>
-                <OrganisationInventoryData/>
+                <DonarToOrgContent/>
          </div>
     </div>
 
