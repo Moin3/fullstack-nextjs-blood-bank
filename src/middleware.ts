@@ -13,9 +13,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
- 
-
-
   if(!isPublicPath && !token){
     return NextResponse.redirect(new URL('/init', request.url))
   }
@@ -28,6 +25,6 @@ export const config = {
     '/login',
     '/register',
     '/profile',
-    '/init'
+    '/init',
   ]
 }

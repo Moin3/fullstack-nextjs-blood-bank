@@ -9,19 +9,19 @@ connectDB()
 export async function GET(request:NextRequest){
 
     try {
-        const organisation = await getDataFromToken(request);
+        const hospital = await getDataFromToken(request);
 
     /* ---------------------- Donar related to organisation --------------------- */
-      const hospitalId = await Inventory.distinct("hospital", {
-        organisation,
+      const orgId = await Inventory.distinct("organisation", {
+        hospital,
       });
 
-      const hospitals = await User.find({ _id: { $in: hospitalId } });
+      const organisations = await User.find({ _id: { $in: orgId } });
   
       return NextResponse.json({
         success: true,
-        message: "Hospital Record Fetched Successfully",
-        hospitals,
+        message: "Organisation Record related to hospital is Fetched Successfully",
+        organisations,
       },{status: 200});
 
     } catch (error:any) {
@@ -32,3 +32,5 @@ export async function GET(request:NextRequest){
     }
 
 }
+
+

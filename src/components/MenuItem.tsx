@@ -14,7 +14,7 @@ const MenuItem = ({ text, active, onClick,path }:IMenu) => {
       >
         <Link 
             className={`cursor-pointer ${
-              active ? 'text-blue-500 font-semibold' : 'text-gray-500'
+              active  ? 'font-semibold bg-red-400 text-white-100' : 'text-gray-500'
             }`} 
             href={`${path}`}> {text} 
         </Link>
