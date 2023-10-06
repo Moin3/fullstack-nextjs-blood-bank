@@ -7,7 +7,7 @@ const override: CSSProperties = {
   display: "block",
   margin: "0 auto",
   transform:'translateY(-50%)',
-  borderColor: "white",
+  borderColor: "Green",
 };
 
 const PreLoder = () => {

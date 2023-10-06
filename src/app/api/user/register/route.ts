@@ -8,13 +8,21 @@ connectDB();
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
-    const { email, password} = reqBody
+    const { email, password, role} = reqBody
     const exisitingUser = await User.findOne({ email });
 
     /* ----------------------------- user validation ---------------------------- */
     if(exisitingUser){
         return NextResponse.json({message: "User already exists"}, {status: 200})
     }
+
+    /* ----------------------------- Admin validation ---------------------------- */
+    if (role === "admin") {
+      const existingAdmin = await User.findOne({ role: "admin" });
+      if (existingAdmin) {
+        return NextResponse.json({message: "Admin already exists"}, {status: 200})
+      }
+  }
 
     /* ------------------------------ hash password ----------------------------- */
         const salt = await bcrypt.genSalt(10)
@@ -29,7 +37,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: "User Registerd Successfully",
+        message: "User Registered Successfully",
         user,
       },
       { status: 200 }

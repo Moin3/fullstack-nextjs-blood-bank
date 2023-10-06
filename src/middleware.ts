@@ -24,7 +24,13 @@ export const config = {
     '/',
     '/login',
     '/register',
-    '/profile',
     '/init',
+    '/donar',
+    '/hospital',
+    '/organisation',
+    '/analytics',
+    '/donar-list',
+    '/hospital-list',
+    '/org-list'
   ]
 }

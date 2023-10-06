@@ -1,8 +1,6 @@
 "use client"
-
 import DonarToOrgContent from "@/components/DonarToOrgContent";
-import OrganisationInventoryData from "@/components/SidebarContent";
-import SidebarMenu from "@/components/SidebarMenu";
+import SidebarMenu from "@/components/menu/SidebarMenu";
 import Header from "@/components/reusable/Header";
 import React from "react";
 

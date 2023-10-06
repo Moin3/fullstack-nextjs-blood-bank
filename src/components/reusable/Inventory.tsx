@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Modal from './Modal';
 import InputType from './InputType';
 import { useFormik } from 'formik';
-import Button from './Button';
 import toast from 'react-hot-toast';
 import { useAppSelector } from '@/redux/hooks';
 import { selectAuth } from '@/redux/features/auth/authSlice';
@@ -10,7 +9,6 @@ import PreLoder from './Preloder';
 
 
 function Inventory() {
-  const baseUrl='http://localhost:3000/api/'
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading,setIsLoading]=useState(false)
   const openModal = () => {
@@ -53,7 +51,7 @@ const {values,handleChange,handleSubmit,errors,touched} = useFormik({
            }else{
             setIsLoading(true)
             /* ------------------------------ Post Api call ----------------------------- */
-            const response=await fetch(`${baseUrl}/inventory/create`, {
+            const response=await fetch('/api/inventory/create', {
              method: 'POST',
              body: JSON.stringify({
                  inventoryType:values.inventoryType,

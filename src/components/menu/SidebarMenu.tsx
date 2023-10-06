@@ -28,10 +28,10 @@ const SidebarMenu = () => {
 
   return (
     <>
+    { /* -------------------------------- daisy UI -------------------------------- */}
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-          {/* Sidebar content here */}
           {/* ---------------------------- organisation menu --------------------------- */}
           {user?.role === 'organisation' && (
             <>
@@ -53,10 +53,16 @@ const SidebarMenu = () => {
                 onClick={() => handleItemClick('Hospital')}
                 path="/hospital"
               />
+              <MenuItem
+                text="ANALYTICS"
+                active={activeItem === 'Analytics'}
+                onClick={() => handleItemClick('Analytics')}
+                path="/analytics"
+              />
             </>
           )}
 
-          {/* ---------------------------- donar menu --------------------------- */}
+          {/* ---------------------------- donar menu and Hospital menu --------------------------- */}
           {(user?.role === 'donar' || user?.role === 'hospital') && (
             <>
               <MenuItem
@@ -71,6 +77,38 @@ const SidebarMenu = () => {
                 onClick={() => handleItemClick('Analytics')}
                 path="/analytics"
               />
+            </>
+          )}
+
+
+             {/* ---------------------------- Admin menu --------------------------- */}
+             {user?.role === 'admin' && (
+            <>
+            <MenuItem
+                text="HOME"
+                active={activeItem === 'Home'}
+                onClick={() => handleItemClick('Home')}
+                path="/"
+              />
+              <MenuItem
+                text="DONAR LIST"
+                active={activeItem === 'Donar'}
+                onClick={() => handleItemClick('Donar')}
+                path="/donar-list"
+              />
+              <MenuItem
+                text="HOSPITAL LIST"
+                active={activeItem === 'Hospital'}
+                onClick={() => handleItemClick('Hospital')}
+                path="/hospital-list"
+              />
+              <MenuItem
+                text="ORGANISATION LIST"
+                active={activeItem === 'Organisation'}
+                onClick={() => handleItemClick('Organisation')}
+                path="/org-list"
+              />
+
             </>
           )}
         </ul>

@@ -1,13 +1,10 @@
 "use client"
 import HospitalToOrgContent from "@/components/HospitalToOrg";
-import SidebarMenu from "@/components/SidebarMenu";
+import SidebarMenu from "@/components/menu/SidebarMenu";
 import Header from "@/components/reusable/Header";
 import React from "react";
 
 const Donar = () => {
-
-
-
   return (
     <div className="home min-h-full">
                 <Header/>
@@ -17,8 +14,6 @@ const Donar = () => {
                 <HospitalToOrgContent/>
          </div>
     </div>
-
-
   );
 };
 

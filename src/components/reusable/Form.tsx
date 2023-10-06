@@ -1,5 +1,5 @@
 "use client"
-import React,{useState,useEffect} from 'react'
+import React,{useEffect} from 'react'
 import InputType from './InputType'
 import Button from './Button';
 import { useFormik } from 'formik';
@@ -92,12 +92,14 @@ const Form = ({formTitle,btnTxt,formType,btnType}:IForm) => {
         if(RegisterUserInfo.isSuccess){
             if(RegisterUserInfo.message === 'User already exists') {
               toast.error("User already exists")
-            }else if(RegisterUserInfo.message === 'User Registerd Successfully'){
-              toast.success('User Registerd Successfully')
+            }else if(RegisterUserInfo.message === 'User Registered Successfully'){
+              toast.success('User Registered Successfully')
               // router.push('/login')
               setTimeout(() => {
                 window.location.replace('/login');
               }, 1000);
+            }else if(RegisterUserInfo.message==='Admin already exists'){
+              toast.error("Admin already exists")
             }
         }
 

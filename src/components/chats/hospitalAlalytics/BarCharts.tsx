@@ -1,7 +1,6 @@
+import PreLoder from '@/components/reusable/Preloder';
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
-
-const baseUrl = 'http://localhost:3000/api/';
 
 interface IBarChartsProperty {
     orgId: string;
@@ -25,6 +24,7 @@ interface IBarChartsProperty {
 
 const BarCharts = ({ orgId, orgName }: IBarChartsProperty) => {
     const [bloodData, setBloodData] = useState({} as Record<string, Record<string, number>>);
+    const [isLoading, setIsLoading] = useState(true);
   
     const [state, setState] = useState<IChartState>({
       options: {
@@ -40,13 +40,15 @@ const BarCharts = ({ orgId, orgName }: IBarChartsProperty) => {
 
   const getOrgRecord = async () => {
     try {
-      const response = await fetch(`${baseUrl}/inventory/hospital-analytics`);
+      const response = await fetch('/api/inventory/hospital-analytics');
       if (!response.ok) {
         console.log('Network response was not ok');
+        setIsLoading(false); 
         return;
       }
       const data = await response.json();
       setBloodData(data.totalBloodQuantityByOrg);
+      setIsLoading(false); 
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
@@ -82,13 +84,17 @@ const BarCharts = ({ orgId, orgName }: IBarChartsProperty) => {
   }, [orgId, orgName, bloodData]);
 
   return (
-    <div className="w-[300px] card bg-base-100 shadow-xl">
+    <div className="z-[-1] w-[300px] card bg-base-100 shadow-xl">
       <div className="mixed-chart">
         <p className="text-center p-2 bg-red-300 flex justify-center items-center">
           <span className="text-sm text-blue-900 px-2">Org. Name:</span>
           <p className="badge">{orgName}</p>
         </p>
-        <Chart options={state.options} series={state.series} type="bar" width="300" />
+        {isLoading ? (
+            <p className='min-h-[220px] flex items-center justify-center'><PreLoder/></p>
+          ) : (
+            <Chart options={state.options} series={state.series} type="bar" width="300" />
+          )}
       </div>
     </div>
   );
