@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '@/redux/store';
 import { getCurrentUserAsync, loginUserAsync, registerUserAsync, signOutAsync } from './authAction';
 import { AuthState } from '@/types/types';
-import { deleteCookie } from 'cookies-next';
+
 
 
 
@@ -79,7 +79,6 @@ export const authSlice = createSlice({
       state.error = null;
     });
     builder.addCase(signOutAsync.fulfilled, (state, { payload }) => {
-      deleteCookie('token');
       state.loading = false;
       state.user = null;
       state.token=null
