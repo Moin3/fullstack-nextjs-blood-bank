@@ -1,12 +1,12 @@
 import { IFormValues, ILoginReq } from "@/types/types";
 
-const baseUrl='http://localhost:3000/api/'
+// const baseUrl='http://localhost:3000/api/'
 
 
 export function loginUser(loginInfo:ILoginReq) {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch(`${baseUrl}/user/login`, {
+        const response = await fetch('/api/user/login', {
           method: 'POST',
           body: JSON.stringify(loginInfo),
           headers: { 'content-type': 'application/json' },
@@ -28,7 +28,7 @@ export function loginUser(loginInfo:ILoginReq) {
   export function RegisterUser(RegisterInfo:IFormValues) {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch(`${baseUrl}/user/register`, {
+        const response = await fetch('/api/user/register', {
           method: 'POST',
           body: JSON.stringify(RegisterInfo),
           headers: { 'content-type': 'application/json' }
@@ -50,7 +50,7 @@ export function loginUser(loginInfo:ILoginReq) {
   export function getCurrentUser() {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch(`${baseUrl}/user/self`);
+        const response = await fetch('/api/user/self');
         if (response.ok) {
           const data = await response.json();
           resolve({ data });
@@ -68,7 +68,7 @@ export function loginUser(loginInfo:ILoginReq) {
   export function signOut() {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch(`${baseUrl}/user/logout`);
+        const response = await fetch('/api/user/logout');
         if (response.ok) {
           const data = await response.json();
           resolve({ data });
