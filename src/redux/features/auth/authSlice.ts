@@ -78,6 +78,7 @@ export const authSlice = createSlice({
     builder.addCase(signOutAsync.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.user = null;
+      state.token=null
     });
   }
 })
