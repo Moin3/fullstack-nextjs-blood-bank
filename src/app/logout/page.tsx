@@ -7,7 +7,7 @@ import {useEffect} from 'react'
 import toast from 'react-hot-toast';
 
 const Logout = () => {
-    const {user,token}=useAppSelector(selectAuth)
+    const {token}=useAppSelector(selectAuth)
     
     const dispatch=useAppDispatch()
     useEffect(() => {
@@ -18,7 +18,7 @@ const Logout = () => {
                 window.location.replace('/login');
               }, 1000);
         }
-      },[token]);
+      },[]);
 
       
       return(
