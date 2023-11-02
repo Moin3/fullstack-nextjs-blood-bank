@@ -18,7 +18,7 @@ const Logout = () => {
                 window.location.replace('/login');
               }, 1000);
         }
-      },[user]);
+      },[token]);
 
       
       return(
