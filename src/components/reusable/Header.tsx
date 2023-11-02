@@ -4,25 +4,32 @@ import { useAppSelector } from '@/redux/hooks';
 import Link from 'next/link';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { deleteCookie } from 'cookies-next';
+
 
 
 const Header = () => {
     const {user}=useAppSelector(selectAuth)
     const handleLogout = async () => {
-      try {
-        const response = await fetch('/api/user/logout');
-        if (!response.ok) {
-          console.log('Network response was not ok');
-          return;
-        }
-        toast.success('Successfully Logged out')
+      // try {
+      //   const response = await fetch('/api/user/logout');
+      //   if (!response.ok) {
+      //     console.log('Network response was not ok');
+      //     return;
+      //   }
+      //   toast.success('Successfully Logged out')
+      //   setTimeout(() => {
+      //     window.location.replace('/login');
+      //   }, 1000);
+  
+      // } catch (error) {
+      //   console.error('There was a problem with the fetch operation:', error);
+      // }
+deleteCookie('token', { domain: 'https://blood-donation-management-delta.vercel.app/' });
+toast.success('Successfully Logged out')
         setTimeout(() => {
           window.location.replace('/login');
         }, 1000);
-  
-      } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-      }
     };
 
   return (
