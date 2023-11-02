@@ -2,10 +2,13 @@
 import { selectAuth } from '@/redux/features/auth/authSlice';
 import { useAppSelector } from '@/redux/hooks';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation'
 import React from 'react';
 import toast from 'react-hot-toast';
 
+
 const Header = () => {
+    const router=useRouter()
     const {user}=useAppSelector(selectAuth)
     const handleLogout = async () => {
       try {
@@ -15,9 +18,7 @@ const Header = () => {
           return;
         }
         toast.success('Successfully Logged out')
-        setTimeout(() => {
-          window.location.replace('/login');
-        }, 1000);
+        router.push('/login')
   
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
