@@ -7,17 +7,17 @@ import {useEffect} from 'react'
 import toast from 'react-hot-toast';
 
 const Logout = () => {
-    const {user}=useAppSelector(selectAuth)
-    const dispatch=useAppDispatch()
-    useEffect(() => {
-        dispatch(signOutAsync({}));
-        if(user===null){
-            toast.success('Logged out')
-            setTimeout(() => {
-                window.location.replace('/login');
-              }, 1000);
-        }
-      },[user]);
+    // const {user}=useAppSelector(selectAuth)
+    // const dispatch=useAppDispatch()
+    // useEffect(() => {
+    //     dispatch(signOutAsync({}));
+    //     if(user===null){
+    //         toast.success('Logged out')
+    //         setTimeout(() => {
+    //             window.location.replace('/login');
+    //           }, 1000);
+    //     }
+    //   },[user]);
 
       
       return(

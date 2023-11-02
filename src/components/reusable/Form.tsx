@@ -72,6 +72,7 @@ const Form = ({formTitle,btnTxt,formType,btnType}:IForm) => {
             );
             
           }
+          action.resetForm();
         },
       });
 
