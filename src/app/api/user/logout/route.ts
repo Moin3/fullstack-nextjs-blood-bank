@@ -6,8 +6,9 @@ export async function GET(request:NextRequest) {
     success: true,
   });
 
-  response.cookies.set("token", "", {
-    expires: new Date(0),
+  response.cookies.set("token", '', {
+      expires: new Date(Date.now()),
+      httpOnly: true,
   });
 
   return response;
