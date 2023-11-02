@@ -7,11 +7,12 @@ import {useEffect} from 'react'
 import toast from 'react-hot-toast';
 
 const Logout = () => {
-    const {user}=useAppSelector(selectAuth)
+    const {user,token}=useAppSelector(selectAuth)
+    
     const dispatch=useAppDispatch()
     useEffect(() => {
         dispatch(signOutAsync({}));
-        if(user===null){
+        if(token===''){
             toast.success('Logged out')
             setTimeout(() => {
                 window.location.replace('/login');
