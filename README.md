@@ -133,11 +133,15 @@ To run this project, you will need to add the following environment variables to
 **Donor Features:**
 - `Organization`: View all organizations where blood donations were made.
 - `Analytics`: Track blood donation history through bar charts displaying the quantity and type of blood donated to each organization.
+
+
 **Organization Features:**
 - `Inventory System`: Manage blood inventory, including incoming and - outgoing blood units.
 - `Donor List`: Access a list of donors who have donated blood to the - organization.
 - `Hospital List`: View registered hospitals and manage blood supply to them.
 - `Analytics`: Analyze blood inventory through bar charts showing total in, total out, and available blood units categorized by blood group.
+
+  
 **Hospital Features:**
 - `Organization`: View available organizations to procure blood from.
 - `Analytics`: Track blood procurement from different organizations - through bar charts.
