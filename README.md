@@ -52,7 +52,7 @@ Be a Hero is a blood donation management system designed to facilitate the proce
 
 
 ```bash
-  git clone https://github.com/dev-moinIslam/fullstack-nextjs-blood-bank.git
+  git clone https://github.com/dev-moinislam/fullstack-nextjs-blood-bank.git
   cd blood-donation
   npm install
 ```
