@@ -7,9 +7,9 @@ const RegisterForm: React.FC = () => {
   return (
     <>
       <LogRegNavbar/>
-      <div className=" flex items-center justify-center bg-base-200">
-        <div className="bg-white mt-14 mb-14 p-8 rounded-md shadow-lg w-96 mx-5">
-          <Form formTitle='Registration' btnTxt="Register" formType="register" btnType="login"/>
+      <div className=" min-h-screen flex items-center justify-center bg-base-200 px-7">
+        <div className="bg-white mt-16 mb-14 p-3 sm:p-8 md:p-8 rounded-md shadow-lg min-w-[315px] mx-5 my-5">
+          <Form formTitle='Blood Bank Registration' btnTxt="Register" formType="register" btnType="login"/>
         </div>
       </div>
     </>
