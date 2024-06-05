@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+
 const BarCharts = dynamic(() => import('./BarCharts'), {
     ssr: false,
   });
 
+  
 const Charts = () => {
   const [organisationData, setOrganisationData] = useState([] as any);
   const [loading, setLoading] = useState(true);

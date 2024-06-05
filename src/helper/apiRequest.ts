@@ -1,6 +1,5 @@
 import { IFormValues, ILoginReq } from "@/types/types";
 
-// const baseUrl='http://localhost:3000/api/'
 
 
 export function loginUser(loginInfo:ILoginReq) {

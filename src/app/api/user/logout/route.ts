@@ -8,6 +8,8 @@ export async function GET(request:NextRequest) {
 
   response.cookies.set("token", '', {
       expires: new Date(0),
+      path: '/',
+      domain: 'https://fullstack-nextjs-blood-bank.vercel.app/'
   });
 
   return response;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 
-// const baseUrl = 'http://localhost:3000/api/';
 
 interface IBloodGroupData {
   bloodGroup: string;
