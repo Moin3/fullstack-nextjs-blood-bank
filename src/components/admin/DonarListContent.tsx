@@ -32,7 +32,7 @@ const DonarListContent = () => {
 
     useEffect(()=>{
         getDonarRecord()
-    },[])
+    },[recordedData])
 
 
     const handleDelete = async (id:any) => {
@@ -56,7 +56,7 @@ const DonarListContent = () => {
               const data = await response.json();
               toast.success(data.message)
               setLoading(false);
-              window.location.reload()
+              // window.location.reload()
 
 
     
