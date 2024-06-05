@@ -9,10 +9,12 @@ export const dynamic = 'force-dynamic';
 export async function DELETE(request: NextRequest) {
   try {
     const { id } = await request.json();
-    console.log(`Attempting to delete user with ID: ${id}`); // Log for debugging
+    console.log(`Attempting to delete user with ID: ${id}`); 
+
     const deletedUser = await User.findByIdAndDelete(id);
-    
+
     if (!deletedUser) {
+      console.log(`User not found with ID: ${id}`); 
       return NextResponse.json({
         success: false,
         message: 'User not found',
@@ -25,7 +27,7 @@ export async function DELETE(request: NextRequest) {
     }, { status: 200 });
 
   } catch (error: any) {
-    console.error('Delete API error:', error); // Improved error logging
+    console.error('Delete API error:', error); 
     return NextResponse.json({
       success: false,
       message: 'Something went wrong with the Delete API',

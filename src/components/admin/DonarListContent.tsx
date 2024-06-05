@@ -23,6 +23,7 @@ const DonorListContent = () => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
+      console.log('Fetched data:', data); // Debugging line
       setRecordedData(data.donarData);
       setIsLoading(false);
     } catch (error) {
@@ -45,8 +46,7 @@ const DonorListContent = () => {
       });
 
       if (!response.ok) {
-        toast.error('Delete request failed');
-        return;
+        throw new Error('Delete request failed');
       }
 
       const data = await response.json();
@@ -54,7 +54,7 @@ const DonorListContent = () => {
       setRecordedData((prevData) => prevData.filter((item) => item._id !== id));
     } catch (error) {
       toast.error('Error deleting donor');
-      console.error('Error:', error);
+      console.error('Error deleting donor:', error); 
     } finally {
       setDeletingItemId(null);
     }
