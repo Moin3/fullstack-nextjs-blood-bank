@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import React from 'react';
+import Image from 'next/image'
+import heroPic from '../../../public/hero.png'
 
 const InitialPage = () => {
   return (
@@ -10,15 +11,15 @@ const InitialPage = () => {
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal">
-          <li className="text-sm"><span className='font-semibold'>Contact us:</span><a href="mailto:moinislam668@gmail.com"> moinislam668@gmail.com</a></li>
+          <li className="text-sm"><span className='font-semibold'>Contact us:</span><a href="mailto:moin.coder@gmail.com"> moin.coder@gmail.com</a></li>
           </ul>
         </div>
       </div>
       <div className="hero min-h-screen bg-base-200">
-          <div className="hero-content flex-col lg:flex-row-reverse">
-            <img src="https://students.mu-varna.bg/wp-content/uploads/2023/04/IMG_2533.png" className="max-w-md rounded-lg shadow-2xl" />
+          <div className="hero-content flex-col lg:flex-row-reverse items-center justify-center">
+            <Image src={heroPic} alt="picture is not found" width={300} height={500}  className="rounded-lg shadow-lg"/>
             <div>
-              <h1 className="text-5xl font-bold text-red-300 drop-shadow-lg">Welcome to Blood Bank</h1>
+              <h1 className="text-2xl sm:text-3xl md:text-5xl text-center sm:text-left md:text-left font-bold text-red-300 drop-shadow-lg">Welcome to Blood Bank</h1>
               <p className="py-6 text-dark-50"><span className=' text-red-400 font-medium'>"Be a Lifesaver: Donate Blood Today!"</span><br/>
 
                   Welcome to our Blood Bank, where heroes like you make a difference.<br/>
