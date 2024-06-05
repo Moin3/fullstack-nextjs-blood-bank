@@ -5,10 +5,12 @@ import toast from 'react-hot-toast';
 
 
 const DonarListContent = () => {
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [recordedData,setRecordedData]=useState([] as any)
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const [deletingItemId, setDeletingItemId] = useState(null);
+
+
     const getDonarRecord=async ()=>{
 
          const response= await fetch('/api/inventory/donar-list') 
@@ -38,7 +40,7 @@ const DonarListContent = () => {
     const handleDelete = async (id:any) => {
         try {
             setDeletingItemId(id)
-            setLoading(true)
+            setIsLoading(true)
             const response = await fetch(
                 '/api/user/delete', 
                 {
@@ -51,19 +53,19 @@ const DonarListContent = () => {
     
             if (!response.ok) {
                 toast.error('Delete request failed')
-                setLoading(false)
+                setIsLoading(false)
                 return;
               }
               const data = await response.json();
               toast.success(data.message)
-              setLoading(false);
+              setIsLoading(false);
               // window.location.reload()
 
 
     
         } catch (error) {
             console.log('Error:', error);
-            setLoading(false); 
+            setIsLoading(false); 
         }
     };
 
