@@ -44,7 +44,8 @@ const DonarListContent = () => {
                 {
                     method: 'DELETE',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(id)
+                    body: JSON.stringify(id),
+                    next: { revalidate: 1 }
                 }
             )
     
