@@ -120,12 +120,13 @@ const Form = ({formTitle,btnTxt,formType,btnType}:IForm) => {
           
           <div className="flex text-[12px]">
                 <div className="">
-                    <div className="flex text-[12px] gap-3">
-                        <InputType labelTxt='Admin' inputType='radio' id='adminRadio' name='role' value='admin' onChange={handleChange} checked={values.role === 'admin'}/>
-                        <InputType labelTxt='Donar' inputType='radio' id='donarRadio' name='role' value='donar' onChange={handleChange} checked={values.role === 'donar'}/>
-                        <InputType labelTxt='Hospital' inputType='radio' id='hospitalRadio' name='role' value='hospital' onChange={handleChange} checked={values.role === 'hospital'}/>
-                        <InputType labelTxt='Organisation' inputType='radio' id='organisationRadio' name='role' value='organisation' onChange={handleChange} checked={values.role === 'organisation'}/>
-                    </div>
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                  <InputType labelTxt="Admin" inputType="radio" id="adminRadio" name="role" value="admin" onChange={handleChange} checked={values.role === "admin"} />
+                  <InputType labelTxt="Donar" inputType="radio" id="donarRadio" name="role" value="donar" onChange={handleChange} checked={values.role === "donar"} />
+                  <InputType labelTxt="Hospital" inputType="radio" id="hospitalRadio" name="role" value="hospital" onChange={handleChange} checked={values.role === "hospital"} />
+                  <InputType labelTxt="Organisation" inputType="radio" id="organisationRadio" name="role" value="organisation" onChange={handleChange} checked={values.role === "organisation"} />
+                </div>
+
                     <p className="text-red-500 text-xs mt-1 ml-1">
                         {
                             touched.role && errors.role ? (
