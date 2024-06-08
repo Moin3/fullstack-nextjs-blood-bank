@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import toast from 'react-hot-toast';
 
@@ -51,7 +51,8 @@ const DonarListContent = () => {
             }
             const data = await response.json();
             toast.success(data.message);
-            setRecordedData(recordedData.filter((item: any) => item._id !== id));
+            // Re-fetch data to ensure the list is updated
+            await getDonarRecord();
         } catch (error) {
             console.log('Error:', error);
         } finally {
