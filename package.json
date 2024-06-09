@@ -1,6 +1,7 @@
 {
   "name": "blood-donation",
   "version": "0.1.0",
+  "proxy": "",
   "private": true,
   "scripts": {
     "dev": "next dev",

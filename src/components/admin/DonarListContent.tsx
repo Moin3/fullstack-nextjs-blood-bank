@@ -1,112 +1,116 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import moment from 'moment';
 import toast from 'react-hot-toast';
 
-interface Donar {
-  _id: string;
-  name: string;
-  email: string;
-  phone: string;
-  createdAt: string;
-}
+const DonarListContent = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [recordedData, setRecordedData] = useState([] as any);
+  const [loading, setLoading] = useState(false);
+  const [deletingItemId, setDeletingItemId] = useState<string | null>(null);
 
-const DonarListContent: React.FC = () => {
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [recordedData, setRecordedData] = useState<Donar[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [deletingItemId, setDeletingItemId] = useState<string | null>(null);
-
-    const getDonarRecord = async (): Promise<void> => {
-        try {
-            const response = await fetch('/api/inventory/donar-list', { cache: 'no-store' });
-            if (!response.ok) {
-                console.log('Network response was not ok');
-                setIsLoading(false);
-                return;
-            }
-            const data = await response.json();
-            setRecordedData(data.donarData);
-            setIsLoading(false);
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-        }
+  
+// get all doner list
+  const getDonarRecord = async () => {
+    try {
+      const response = await fetch('/api/inventory/donar-list');
+      if (!response.ok) {
+        console.log('Network response was not ok');
+        setIsLoading(false);
+        return;
+      }
+      const data = await response.json();
+      setRecordedData(data.donarData);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+      setIsLoading(false);
     }
+  }
 
-    useEffect(() => {
-        getDonarRecord();
-    }, []); // Fetch data only once on component mount
+  useEffect(() => {
+    getDonarRecord();
+  }, []);
 
-    const handleDelete = async (id: string): Promise<void> => {
-        try {
-            setDeletingItemId(id);
-            setLoading(true);
-            const response = await fetch(
-                '/api/user/delete',
-                {
-                    method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id }) // Ensure ID is sent as an object
-                }
-            );
 
-            if (!response.ok) {
-                toast.error('Delete request failed');
-                setLoading(false);
-                return;
-            }
-            const data = await response.json();
-            toast.success(data.message);
-            setLoading(false);
-            setRecordedData((prevData) => prevData.filter(item => item._id !== id)); // Update local state after deletion
+  // delete specific donar from donar list using id
+  const handleDelete = async (id: string) => {
+    try {
+      setDeletingItemId(id);
+      setLoading(true);
+      const response = await fetch('/api/user/delete', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(id)
+      });
 
-        } catch (error) {
-            console.log('Error:', error);
-            setLoading(false);
-        }
-    };
+      if (!response.ok) {
+        toast.error('Delete request failed');
+        setLoading(false);
+        return;
+      }
+      
+      const data = await response.json();
+      toast.success(data.message);
+      setLoading(false);
+      setRecordedData(recordedData.filter((item: any) => item._id !== id));
+      setDeletingItemId(null);
 
-    return (
-        <div className="w-[100vw] lg:w-[65vw] overflow-x-scroll md:overflow-x-auto p-8">
-            {isLoading ? (
-                <div className='min-h-[300px] flex justify-center items-center font-bold text-red-500'>Loading...</div>
+    } catch (error) {
+      
+      console.log('Error:', error);
+      setLoading(false);
+      setDeletingItemId(null);
+    }
+  };
+
+  return (
+    <div className="w-[100vw] lg:w-[65vw] overflow-x-scroll md:overflow-x-auto p-8">
+      {isLoading ? (
+        <div className='min-h-[300px] flex justify-center items-center font-bold text-red-500'>Loading...</div>
+      ) : (
+        <table className="min-w-full bg-white border rounded-lg overflow-hidden">
+          <thead className="bg-gray-200">
+            <tr className="text-gray-700">
+              <th scope="col" className="px-6 py-3 text-left font-bold">Donar Name</th>
+              <th scope="col" className="px-6 py-3 text-left font-bold">Email</th>
+              <th scope="col" className="px-6 py-3 text-left font-bold">Phone</th>
+              <th scope="col" className="px-6 py-3 text-left font-bold">Date</th>
+              <th scope="col" className="px-6 py-3 text-left font-bold">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {recordedData.length === 0 ? (
+              <tr>
+                <td colSpan={5} className="text-center p-3">No data available</td>
+              </tr>
             ) : (
-                <table className="min-w-full bg-white border rounded-lg overflow-hidden">
-                    <thead className="bg-gray-200">
-                        <tr className="text-gray-700">
-                            <th scope="col" className="px-6 py-3 text-left font-bold">Donar Name</th>
-                            <th scope="col" className="px-6 py-3 text-left font-bold">Email</th>
-                            <th scope="col" className="px-6 py-3 text-left font-bold">Phone</th>
-                            <th scope="col" className="px-6 py-3 text-left font-bold">Date</th>
-                            <th scope="col" className="px-6 py-3 text-left font-bold">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {recordedData.map((item) => (
-                            <tr key={item._id} className="hover:bg-gray-100">
-                                <td className="p-3">{item.name}</td>
-                                <td className="p-3">{item.email}</td>
-                                <td className="p-3">{item.phone}</td>
-                                <td className="p-3 text-sm">{moment(item.createdAt).format('DD/MM/YYYY hh:mm A')}</td>
-                                <td className="p-3">
-                                    {deletingItemId === item._id ? (
-                                        'Deleting...'
-                                    ) : (
-                                        <span
-                                            className="cursor-pointer text-blue-500 z-5"
-                                            onClick={() => handleDelete(item._id)}
-                                        >
-                                            Delete
-                                        </span>
-                                    )}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+              recordedData.map((item: any) => (
+                <tr key={item._id} className="hover:bg-gray-100">
+                  <td className="p-3">{item.name}</td>
+                  <td className="p-3">{item.email}</td>
+                  <td className="p-3">{item.phone}</td>
+                  <td className="p-3 text-sm">{moment(item.createdAt).format('DD/MM/YYYY hh:mm A')}</td>
+                  <td className="p-3">
+                    {deletingItemId === item._id ? (
+                      'Deleting...'
+                    ) : (
+                      <span
+                        className="cursor-pointer text-blue-500 z-5"
+                        onClick={() => handleDelete(item._id)}
+                      >
+                        Delete
+                      </span>
+                    )}
+                  </td>
+                </tr>
+              ))
             )}
-        </div>
-    )
+          </tbody>
+        </table>
+      )}
+    </div>
+  )
 }
 
-export default DonarListContent;
+export default DonarListContent
