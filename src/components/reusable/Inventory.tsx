@@ -170,7 +170,7 @@ const {values,handleChange,handleSubmit,errors,touched} = useFormik({
                         id="bloodGroup"
                         name="bloodGroup"
                         onChange={handleChange}
-                        className="block w-full bg-white border focus:outline-none focus:border-pink-500 px-4 py-2 pr-8 rounded-lg shadow leading-tight focus:outline-none focus:shadow-outline"
+                        className="block w-full bg-white border focus:outline-none focus:border-pink-500 px-4 py-2 pr-8 rounded-lg shadow leading-tight focus:shadow-outline"
                         >
                         <option defaultValue={"Open this select menu"}>
                             Select a blood group
@@ -202,7 +202,7 @@ const {values,handleChange,handleSubmit,errors,touched} = useFormik({
                 <div className="mt-4">
                 <button
                     type="submit"
-                    className="w-full text-[15px] bg-red-600 hover:bg-red-500 text-white font-semibold py-1 px-2 rounded hover:bg-pink-600 focus:outline-none focus:ring focus:ring-pink-400"
+                    className="w-full text-[15px] bg-red-600  text-white font-semibold py-1 px-2 rounded hover:bg-pink-600 focus:outline-none focus:ring focus:ring-pink-400"
                 >
                     {isLoading ? <PreLoder/> : "Submit"}
                 </button>
