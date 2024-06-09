@@ -9,9 +9,11 @@ const DonarListContent = () => {
     const [recordedData,setRecordedData]=useState([] as any)
     const [loading, setLoading] = useState(false);
     const [deletingItemId, setDeletingItemId] = useState(null);
+
+    
     const getDonarRecord=async ()=>{
 
-         const response= await fetch('/api/inventory/donar-list') 
+         const response= await fetch('/api/inventory/donar-list',{cache:'no-store'}) 
             .then(response => {
                 if (!response.ok) {
                 console.log('Network response was not ok');
@@ -40,7 +42,7 @@ const DonarListContent = () => {
             setDeletingItemId(id)
             setLoading(true)
             const response = await fetch(
-                'https://fullstack-nextjs-blood-bank.vercel.app/api/user/delete', 
+                '/api/user/delete', 
                 {
                     method: 'DELETE',
                     headers: {'Content-Type': 'application/json'},
