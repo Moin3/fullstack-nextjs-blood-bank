@@ -1,26 +1,23 @@
-import { NextRequest,NextResponse } from "next/server";
-import User from "@/models/userModel";
-import { connectDB } from "@/config/db";
+import { NextRequest, NextResponse } from 'next/server';
+import User from '@/models/userModel';
+import { connectDB } from '@/config/db';
 
-connectDB()
+connectDB();
 
-export async function DELETE(request:NextRequest){
-    
+export async function DELETE(request: NextRequest) {
     try {
-        const id = await request.json();
-        console.log(id)
+        const { id } = await request.json();
+        console.log(id);
         await User.findByIdAndDelete(id);
         return NextResponse.json({
             success: true,
             message: "User Deleted successfully"
-        }, {status: 200});
-
-    } catch (error:any) {
+        }, { status: 200 });
+    } catch (error: any) {
         return NextResponse.json({
             success: false,
             message: "Something wrong with Delete Api",
             error: error.message
-        }, {status: 500});
+        }, { status: 500 });
     }
-
 }
