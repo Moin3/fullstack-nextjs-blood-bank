@@ -8,6 +8,7 @@ export async function DELETE(request:NextRequest){
     
     try {
         const id = await request.json();
+        console.log(id)
         await User.findByIdAndDelete(id);
         return NextResponse.json({
             success: true,

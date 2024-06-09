@@ -40,7 +40,7 @@ const DonarListContent = () => {
             setDeletingItemId(id)
             setLoading(true)
             const response = await fetch(
-                '/api/user/delete', 
+                'https://fullstack-nextjs-blood-bank.vercel.app/api/user/delete', 
                 {
                     method: 'DELETE',
                     headers: {'Content-Type': 'application/json'},
