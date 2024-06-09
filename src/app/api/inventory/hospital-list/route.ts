@@ -1,7 +1,7 @@
-import { getDataFromToken } from "@/helper/getDataFromToken";
 import { NextRequest,NextResponse } from "next/server";
 import { connectDB } from "@/config/db";
 import User from "@/models/userModel";
+import { revalidatePath } from 'next/cache'
 
 
 
@@ -13,6 +13,10 @@ export async function GET(request:NextRequest){
         const hospitalData = await User
                 .find({ role: "hospital" })
                 .sort({ createdAt: -1 });
+
+        // revalidate path for caching error solve
+        const path = request.nextUrl.searchParams.get('path') || '/';
+        revalidatePath(path)
 
         return NextResponse.json({
             success: true,
