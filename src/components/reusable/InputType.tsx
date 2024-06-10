@@ -2,7 +2,7 @@ import { IInputType } from '@/types/types'
 import React from 'react'
 
 
-const InputType = ({labelTxt,inputType,id,name,value,onChange,checked}:IInputType) => {
+const InputType = ({labelTxt,inputType,id,name,value,onChange,checked,placeholder}:IInputType) => {
   return (
     <>
 
@@ -31,6 +31,7 @@ const InputType = ({labelTxt,inputType,id,name,value,onChange,checked}:IInputTyp
                         value={value}
                         onChange={onChange}
                         className="w-full px-2 py-1 border rounded-md focus:outline-none focus:border-pink-500"
+                        placeholder={placeholder}
                     />
                 </>
             )

@@ -39,6 +39,8 @@ export interface IInputType{
     value:any,
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     checked?:boolean,
+    placeholder?:string
+
 }
 
 export interface ILoginReq{
@@ -74,7 +76,7 @@ export interface IForm{
     formTitle:string,
     btnTxt:string,
     formType:string,
-    btnType:string
+    btnType:string,
 }
 
 export interface IFormValues {

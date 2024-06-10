@@ -41,7 +41,7 @@ const OrgAnalyticsInfo = () => {
   return (
     <div className="flex flex-wrap justify-center ">
       {bloodData.map((record) => (
-        <div key={record.bloodGroup} className="z-[] card bg-base-100 shadow-xl mb-4 mr-4">
+        <div key={record.bloodGroup} className="z-[-10] card rounded-none shadow-md mb-4 mr-4">
           <div className="mixed-chart p-4">
             
             <div className="avatar">

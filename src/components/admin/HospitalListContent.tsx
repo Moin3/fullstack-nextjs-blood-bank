@@ -63,11 +63,11 @@ const HospitalListContent = () => {
   };
 
   return (
-    <div className="w-[100vw] lg:w-[65vw] overflow-x-scroll md:overflow-x-auto p-8">
+    <div className="w-[93vw] lg:w-[65vw] overflow-x-scroll md:overflow-x-auto min-w-full">
       {isLoading ? (
         <div className='min-h-[300px] flex justify-center items-center font-bold text-red-500'>Loading...</div>
       ) : (
-        <table className="min-w-full bg-white border rounded-lg overflow-hidden">
+        <table className="min-w-full bg-white border rounded-lg overflow-x-scroll">
           <thead className="bg-gray-200">
             <tr className="text-gray-700">
               <th scope="col" className="px-6 py-3 text-left font-bold">Hospital Name</th>

@@ -84,7 +84,7 @@ const BarCharts = ({ orgId, orgName }: IBarChartsProperty) => {
   }, [orgId, orgName, bloodData]);
 
   return (
-    <div className="z-[-1] w-[300px] card bg-base-100 shadow-xl">
+    <div className="z-[-1] w-[300px] card rounded-none shadow-xl">
       <div className="mixed-chart">
         <p className="text-center p-2 bg-red-300 flex justify-center items-center">
           <span className="text-sm text-blue-900 px-2">Org. Name:</span>

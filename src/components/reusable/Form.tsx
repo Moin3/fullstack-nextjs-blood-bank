@@ -145,7 +145,9 @@ const Form = ({formTitle,btnTxt,formType,btnType}:IForm) => {
                 <>
                   {/* -------------------------- email and validation -------------------------- */}
                     <div className="mb-3">
-                        <InputType labelTxt='Email' inputType='text' id='email' name='email' value={values.email} onChange={handleChange} />
+                        <InputType labelTxt='Email' inputType='text' id='email' name='email' value={values.email} onChange={handleChange} 
+                          placeholder={ values.role === "donar" ? "test email: moin@gmail.com" : values.role === "hospital" ? "test email: hospital@gmail.com" :  values.role === "admin" ? "admin email is secrate" : "test email: org@gmail.com" }
+                        />
                         <p className="text-red-500 text-xs mt-1 ml-1">
                             {
                                 touched.email && errors.email ? (
@@ -156,7 +158,15 @@ const Form = ({formTitle,btnTxt,formType,btnType}:IForm) => {
                     </div>
                     {/* ------------------------- password and validation ------------------------ */}
                     <div className="mb-3">
-                        <InputType labelTxt='Password' inputType='password' id='password' name='password' value={values.password} onChange={handleChange}/>
+                    <InputType
+                        labelTxt='Password'
+                        inputType='password'
+                        id='password'
+                        name='password'
+                        value={values.password}
+                        onChange={handleChange}
+                        placeholder={ values.role === "donar" ? "test pass: moin@gmail.com" : values.role === "hospital" ? "test pass: hospital@gmail.com" :  values.role === "admin" ? "admin password is secrate" : "test pass: org@gmail.com" }
+                    />
                         <p className="text-red-500 text-xs mt-1 ml-1">
                             {
                                 touched.password && errors.password ? (
