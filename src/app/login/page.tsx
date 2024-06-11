@@ -6,14 +6,13 @@ import React from 'react';
 const LoginForm: React.FC = () => {
   return (
     <>
-    <LogRegNavbar/>
-    <div className="min-h-screen flex items-center justify-center bg-base-200 px-7">
-      <div className="bg-white mt-24 mb-14 p-6 sm:p-8 md:p-8 rounded-md shadow-lg min-w-[315px] mx-5">
-        <Form formTitle='Blood Bank Login' btnTxt="Login" formType="login" btnType="login"/>
+      <LogRegNavbar />
+      <div className="min-h-screen flex items-center justify-center bg-base-200 px-7">
+        <div className="bg-white mt-24 mb-14 p-6 sm:p-8 md:p-8 rounded-md shadow-lg min-w-[315px] mx-5">
+          <Form formTitle='Blood Bank Login' btnTxt="Login" formType="login" btnType="login" />
+        </div>
       </div>
-    </div>
     </>
-    
   );
 };
 

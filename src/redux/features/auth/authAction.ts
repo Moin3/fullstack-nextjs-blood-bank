@@ -8,7 +8,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
     "auth/login",
     async ({ role, email, password }:ILoginReq, { rejectWithValue }) => {
       try {
-        console.log({ role, email, password })
         const response = await loginUser({ role, email, password });
         return (response as any).data;
         

@@ -18,7 +18,7 @@ const ProtectedRoutesData = ({ children }: ProtectedRoutesDataProps) => {
         dispatch(getCurrentUserAsync(data));
       }
     } catch (error) {
-      console.log(error);
+      console.log("loged out user");
     }
   };
 

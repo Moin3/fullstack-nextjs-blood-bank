@@ -14,6 +14,8 @@ import { useRouter } from 'next/navigation';
 import { IForm, IFormValues } from '@/types/types';
 
 
+
+
 const Form = ({formTitle,btnTxt,formType,btnType}:IForm) => {
   /* ----------------------------- necessary hooks ---------------------------- */
     const router = useRouter()
@@ -288,15 +290,14 @@ const Form = ({formTitle,btnTxt,formType,btnType}:IForm) => {
       {
         formType==="login" ? (
             <p className="text-center mt-3 text-xs">
-                Don't have an account? <a href="/register" className="text-pink-500 hover:underline">Register</a>
+                Don't have an account? <Link className="text-pink-500 hover:underline" href="/register">Register</Link>
             </p>
         ) : (
             <p className="text-center mt-3 text-xs">
-                Already have an account? <a href="/login" className="text-pink-500 hover:underline">Login</a>
+                Already have an account? <Link href="/login" className="text-pink-500 hover:underline">Login</Link>
             </p>
         )
       }
-      
       </>
   )
 }
