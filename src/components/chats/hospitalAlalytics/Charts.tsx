@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 
 const BarCharts = dynamic(() => import('./BarCharts'), {
-    ssr: false,
-  });
+  ssr: false,
+});
 
-  
 const Charts = () => {
   const [organisationData, setOrganisationData] = useState([] as any);
   const [loading, setLoading] = useState(true);
@@ -21,9 +20,9 @@ const Charts = () => {
       const data = await response.json();
       setOrganisationData(data.organisations);
       setLoading(false);
-
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
+      setLoading(false);
     }
   };
 
@@ -31,18 +30,21 @@ const Charts = () => {
     getOrgRecord();
   }, []);
 
-
   if (loading) {
-    return <div className='min-h-[300px] flex justify-center items-center font-bold text-red-500'>Loading...</div>
+    return <div className='min-h-[300px] flex justify-center items-center font-bold text-red-500'>Loading...</div>;
+  }
+
+  if (!organisationData.length) {
+    return <div className='min-h-[300px] flex justify-center items-center font-bold text-red-500'>Please take blood from any registered organization to show your analytics</div>;
   }
 
   return (
     <div className='min-w-full flex flex-row gap-7 flex-wrap items-center justify-center'>
       {organisationData.map((org: any) => (
         <div key={org._id} className="">
-            <div className="">
-                 <BarCharts orgId={org._id} orgName={org.organisationName}/>
-            </div>
+          <div className="">
+            <BarCharts orgId={org._id} orgName={org.organisationName} />
+          </div>
         </div>
       ))}
     </div>

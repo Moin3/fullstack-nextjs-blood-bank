@@ -3,40 +3,40 @@ import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 
 interface IBarChartsProperty {
-    orgId: string;
-    orgName: string;
-  }
-  
-  interface IChartState {
-    options: {
-      chart: {
-        id: string;
-      };
-      xaxis: {
-        categories: string[];
-      };
+  orgId: string;
+  orgName: string;
+}
+
+interface IChartState {
+  options: {
+    chart: {
+      id: string;
     };
-    series: {
-      name: string;
-      data: number[];
-    }[];
-  }
+    xaxis: {
+      categories: string[];
+    };
+  };
+  series: {
+    name: string;
+    data: number[];
+  }[];
+}
 
 const BarCharts = ({ orgId, orgName }: IBarChartsProperty) => {
-    const [bloodData, setBloodData] = useState({} as Record<string, Record<string, number>>);
-    const [isLoading, setIsLoading] = useState(true);
-  
-    const [state, setState] = useState<IChartState>({
-      options: {
-        chart: {
-          id: 'basic-bar',
-        },
-        xaxis: {
-          categories: [],
-        },
+  const [bloodData, setBloodData] = useState({} as Record<string, Record<string, number>>);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [state, setState] = useState<IChartState>({
+    options: {
+      chart: {
+        id: 'basic-bar',
       },
-      series: [],
-    });
+      xaxis: {
+        categories: [],
+      },
+    },
+    series: [],
+  });
 
   const getOrgRecord = async () => {
     try {
@@ -51,6 +51,7 @@ const BarCharts = ({ orgId, orgName }: IBarChartsProperty) => {
       setIsLoading(false); 
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
+      setIsLoading(false);
     }
   };
 
@@ -83,6 +84,15 @@ const BarCharts = ({ orgId, orgName }: IBarChartsProperty) => {
     }
   }, [orgId, orgName, bloodData]);
 
+  if (isLoading) {
+    return <div className='min-h-[220px] flex items-center justify-center'><PreLoder/></div>;
+  }
+
+  const bloodGroupData = bloodData[orgId];
+  if (!bloodGroupData || !Object.keys(bloodGroupData).length) {
+    return null; // Return nothing if there's no data for this organization
+  }
+
   return (
     <div className="z-[-1] w-[300px] card rounded-none shadow-xl">
       <div className="mixed-chart">
@@ -90,11 +100,7 @@ const BarCharts = ({ orgId, orgName }: IBarChartsProperty) => {
           <span className="text-sm text-blue-900 px-2">Org. Name:</span>
           <p className="badge">{orgName}</p>
         </p>
-        {isLoading ? (
-            <p className='min-h-[220px] flex items-center justify-center'><PreLoder/></p>
-          ) : (
-            <Chart options={state.options} series={state.series} type="bar" width="300" />
-          )}
+        <Chart options={state.options} series={state.series} type="bar" width="300" />
       </div>
     </div>
   );

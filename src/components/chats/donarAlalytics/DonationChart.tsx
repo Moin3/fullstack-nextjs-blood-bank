@@ -22,6 +22,7 @@ const DonationChart = () => {
       setLoading(false);
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
+      setLoading(false);
     }
   };
 
@@ -30,7 +31,11 @@ const DonationChart = () => {
   }, []);
 
   if (loading) {
-    return <div className='min-h-[300px] flex justify-center items-center font-bold text-red-500'>Loading...</div>
+    return <div className='min-h-[300px] flex justify-center items-center font-bold text-red-500'>Loading...</div>;
+  }
+
+  if (!organisationData.length) {
+    return <div className='min-h-[300px] flex justify-center items-center font-bold text-red-500'>Please donate first to show your analytics</div>;
   }
 
   return (
