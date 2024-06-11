@@ -56,27 +56,29 @@ const OrgForDonar = () => {
               </ul>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full bg-white border rounded-lg">
-                <thead className="bg-gray-200">
-                  <tr className="text-gray-700">
-                    <th scope="col" className="px-2 py-1 md:px-4 md:py-2 lg:px-6 lg:py-3 text-left font-bold">Organisation Name</th>
-                    <th scope="col" className="px-2 py-1 md:px-4 md:py-2 lg:px-6 lg:py-3 text-left font-bold">Email</th>
-                    <th scope="col" className="px-2 py-1 md:px-4 md:py-2 lg:px-6 lg:py-3 text-left font-bold">Phone</th>
-                    <th scope="col" className="px-2 py-1 md:px-4 md:py-2 lg:px-6 lg:py-3 text-left font-bold">Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {recordedData.map((item: any) => (
-                    <tr key={item._id} className="hover:bg-gray-100">
-                      <td className="p-2 md:p-4 lg:p-6">{item.organisationName}</td>
-                      <td className="p-2 md:p-4 lg:p-6">{item.email}</td>
-                      <td className="p-2 md:p-4 lg:p-6">{item.phone}</td>
-                      <td className="p-2 md:p-4 lg:p-6 text-sm">{moment(item.createdAt).format('DD/MM/YYYY hh:mm A')}</td>
+            <div className="w-[93vw] lg:w-[65vw] overflow-x-auto min-w-full p-4">
+              <div className="overflow-x-auto border rounded-sm">
+                <table className="min-w-full bg-white">
+                  <thead className="bg-gray-200">
+                    <tr className="text-gray-700">
+                      <th scope="col" className="px-6 py-3 text-left font-bold">Organisation Name</th>
+                      <th scope="col" className="px-6 py-3 text-left font-bold">Email</th>
+                      <th scope="col" className="px-6 py-3 text-left font-bold">Phone</th>
+                      <th scope="col" className="px-6 py-3 text-left font-bold">Date</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {recordedData.map((item: any) => (
+                      <tr key={item._id} className="hover:bg-gray-100">
+                        <td className="p-3">{item.organisationName}</td>
+                        <td className="p-3">{item.email}</td>
+                        <td className="p-3">{item.phone}</td>
+                        <td className="p-3 text-sm">{moment(item.createdAt).format('DD/MM/YYYY hh:mm A')}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )
         )}

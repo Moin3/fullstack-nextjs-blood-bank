@@ -36,14 +36,15 @@ const Table = () => {
       <div className="p-8">
         <Inventory onNewDataAdded={handleNewDataAdded} />
       </div>
-      <div className="w-[93vw] lg:w-[65vw] overflow-x-scroll md:overflow-x-auto min-w-full px-5 py-10">
+      <div className="w-[93vw] lg:w-[65vw] overflow-x-auto min-w-full p-4">
         {isLoading ? (
           <div className="min-h-[300px] flex justify-center items-center font-bold text-red-500">Loading...</div>
         ) : (
           recordedData.length === 0 ? (
             <div className="min-h-[300px] flex justify-center items-center font-bold text-red-500">No data available</div>
           ) : (
-            <table className="min-w-full bg-white border rounded-lg overflow-x-scroll">
+            <div className="overflow-x-auto border rounded-sm">
+              <table className="min-w-full bg-white">
               <thead className="bg-blue-200">
                 <tr className="text-gray-700">
                   <th className="px-6 py-3 text-left font-bold">Role</th>
@@ -70,6 +71,8 @@ const Table = () => {
                 ))}
               </tbody>
             </table>
+            </div>
+            
           )
         )}
       </div>
