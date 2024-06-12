@@ -35,7 +35,7 @@ const Charts = () => {
   }
 
   if (!organisationData.length) {
-    return <div className='min-h-[300px] flex justify-center items-center font-bold text-red-500'>Please take blood from any registered organization to show your analytics</div>;
+    return <div className='min-h-[300px] flex justify-center items-center font-bold text-red-500 text-center'>Please take blood from any registered organization to show your analytics</div>;
   }
 
   return (
